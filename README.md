@@ -40,16 +40,10 @@ zoom; portrait orientation is the intended layout.
 
 ## Run locally
 
-The large Baltimore map is stored as compressed source chunks so it stays
-within GitHub's per-file upload limit. Reconstruct it once, then use any static
-file server:
+Flangame is a static browser game with no build step. Use any static file
+server:
 
 ```sh
-cat .github/pages-assets/baltimore-streets.json.gz.b64.* \
-  | base64 --decode \
-  | gzip --decompress \
-  > public/game/baltimore-streets.json
-
 python3 -m http.server 8000 --directory public/game
 ```
 
@@ -65,6 +59,6 @@ playback is unavailable.
 
 ## Deployment
 
-Merging this branch into `main` assembles the Baltimore map and publishes the
-game through GitHub Pages. Set the repository's Pages source to **GitHub
-Actions** once in Settings → Pages.
+Merging this branch into `main` publishes `public/game` through GitHub Pages.
+Set the repository's Pages source to **GitHub Actions** once in Settings →
+Pages.

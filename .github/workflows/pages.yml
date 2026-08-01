@@ -26,20 +26,10 @@ jobs:
         uses: actions/checkout@v6
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Assemble static game
-        shell: bash
-        run: |
-          mkdir -p _site
-          cp -a public/game/. _site/
-          cat .github/pages-assets/baltimore-streets.json.gz.b64.* \
-            | base64 --decode \
-            | gzip --decompress \
-            > _site/baltimore-streets.json
-          touch _site/.nojekyll
       - name: Upload static game
         uses: actions/upload-pages-artifact@v4
         with:
-          path: _site
+          path: public/game
       - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
