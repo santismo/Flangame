@@ -1,0 +1,19 @@
+{
+  "name": "Flangame",
+  "short_name": "Flangame",
+  "description": "Make money. Don't work. Don't feed the green.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#030504",
+  "theme_color": "#030504",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
