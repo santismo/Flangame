@@ -2,7 +2,8 @@ name: Deploy Flangame to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: github-pages
   cancel-in-progress: true
 
 jobs:
@@ -22,13 +23,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Configure Pages
+        uses: actions/checkout@v6
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload game
-        uses: actions/upload-pages-artifact@v3
+      - name: Assemble static game
+        shell: bash
+        run: |
+          mkdir -p _site
+          cp -a public/game/. _site/
+          cat .github/pages-assets/baltimore-streets.json.gz.b64.* \
+            | base64 --decode \
+            | gzip --decompress \
+            > _site/baltimore-streets.json
+          touch _site/.nojekyll
+      - name: Upload static game
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: public/game
-      - name: Deploy to Pages
+          path: _site
+      - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

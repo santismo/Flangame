@@ -6,9 +6,9 @@
       name="viewport"
       content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"
     >
-    <meta name="theme-color" content="#030504">
+    <meta name="theme-color" content="#090909">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Flangame">
     <title>Flangame</title>
     <link rel="manifest" href="./manifest.webmanifest">
@@ -17,32 +17,108 @@
   </head>
   <body>
     <main id="game-wrap" aria-label="Flangame game area">
-      <canvas id="game" width="480" height="270" aria-label="Flangame"></canvas>
-      <div class="crt" aria-hidden="true"></div>
+      <canvas id="game" width="270" height="480" aria-label="Flangame portrait game screen"></canvas>
 
-      <div id="system-controls" aria-label="Game controls">
+      <div id="system-controls" aria-label="System controls">
+        <button id="touch-band" type="button" aria-label="Switch band member">BAND</button>
+        <button id="song-button" type="button" aria-label="Open songs" title="Songs">SONG</button>
+        <button id="touch-teleport" type="button" aria-label="Teleport to a random road">TP</button>
         <button id="pause-button" type="button" aria-label="Pause game" title="Pause">Ⅱ</button>
-        <button id="music-button" type="button" aria-label="Toggle music" title="Music">♪</button>
-        <button id="fx-button" type="button" aria-label="Toggle low bitrate effect" title="Low bitrate effect">8</button>
       </div>
 
-      <section id="start-screen" class="terminal-panel" aria-labelledby="game-title">
-        <div class="title-mark" aria-hidden="true">
-          <span>F</span><i></i><i></i><i></i><i></i><i></i>
-        </div>
+      <section id="start-screen" class="game-panel" aria-labelledby="game-title">
+        <div class="cartridge-mark" aria-hidden="true">F</div>
         <h1 id="game-title">FLANGAME</h1>
-        <p id="start-status">BALTIMORE // NO JOBS // DON'T FEED THE GREEN</p>
-        <button id="start-button" type="button">START</button>
-        <p class="desktop-keys">MOVE WASD/ARROWS · JAM SPACE · USE E · SKILL SHIFT · SWITCH Q</p>
+        <p class="subtitle">BALTIMORE VERSION</p>
+        <div class="starter-copy">
+          <p>PLAY MUSIC.</p>
+          <p>PEOPLE RUN.</p>
+          <p>TRAP THEM WITH A SONG.</p>
+          <p>THEY DROP GREEN BILLS.</p>
+          <p>RIFF: AIM YOUR MUSIC.</p>
+          <p>JAM: PLAY TO THE CROWD.</p>
+          <p>PINCH MAP TO ZOOM.</p>
+          <p>SLIME + VEGAN FOOD = BOOSTS.</p>
+          <p>LEARN ALL 271 SONGS.</p>
+        </div>
+        <button id="start-button" type="button">LOADING CITY...</button>
+        <p id="start-status">LINKING BALTIMORE STREETS...</p>
+        <p class="desktop-keys">MOVE: ARROWS/WASD · JAM: Z/SPACE · RIFF: X/SHIFT · JUMP: C · TELEPORT: V · SONG: ENTER/F</p>
       </section>
 
-      <section id="pause-screen" class="terminal-panel" hidden aria-labelledby="pause-title">
-        <h2 id="pause-title">PAUSED_</h2>
+      <section id="pause-screen" class="game-panel" hidden aria-labelledby="pause-title">
+        <h2 id="pause-title">PAUSED</h2>
         <div class="pause-actions">
           <button id="resume-button" type="button">RESUME</button>
           <button id="reset-position-button" type="button">UNSTUCK</button>
           <button id="new-game-button" type="button">NEW GAME</button>
         </div>
+        <div class="data-credits">
+          <a
+            class="data-credit"
+            href="https://data.baltimorecity.gov/datasets/baltimore::street-centerline-native/about"
+            target="_blank"
+            rel="noreferrer"
+          >STREETS + PARKS: BALTIMORE CITY OPEN DATA</a>
+          <a
+            class="data-credit"
+            href="https://data.imap.maryland.gov/datasets/maryland-building-footprints/about"
+            target="_blank"
+            rel="noreferrer"
+          >BUILDING FOOTPRINTS: MARYLAND iMAP</a>
+        </div>
+        <small>STYLIZED GAME MAP · NOT FOR NAVIGATION</small>
+      </section>
+
+      <section id="character-select" class="game-panel" hidden aria-labelledby="character-select-title">
+        <p class="character-kicker">NEW GAME</p>
+        <h2 id="character-select-title">CHOOSE YOUR PLAYER</h2>
+        <p class="character-select-copy">EVERYONE CAN JAM AND RIFF.</p>
+        <div class="character-options" role="group" aria-label="Choose a band member">
+          <button class="character-option santi" type="button" data-character="0">
+            <span class="character-face" aria-hidden="true">S</span>
+            <strong>SANTI</strong>
+            <small>GUITAR</small>
+          </button>
+          <button class="character-option nick" type="button" data-character="1">
+            <span class="character-face" aria-hidden="true">N</span>
+            <strong>NICK</strong>
+            <small>DRUMS</small>
+          </button>
+          <button class="character-option jake" type="button" data-character="2">
+            <span class="character-face" aria-hidden="true">J</span>
+            <strong>JAKE</strong>
+            <small>BASS</small>
+          </button>
+        </div>
+        <p class="character-select-note">#001 ADUGARI STARTS EVERY NEW GAME.</p>
+      </section>
+
+      <section id="flangadex" class="dex-panel" hidden aria-labelledby="dex-title">
+        <header class="dex-header">
+          <div>
+            <h2 id="dex-title">FLANGADEX</h2>
+            <p id="dex-count">001 / 271</p>
+          </div>
+          <button id="dex-close" type="button" aria-label="Close Flangadex">B</button>
+        </header>
+        <div class="dex-career">
+          <span id="dex-level">LV.01</span>
+          <span id="dex-progress">$0 / $75</span>
+        </div>
+        <div class="dex-meter" aria-hidden="true"><i id="dex-meter-fill"></i></div>
+        <p id="dex-unlock-banner" hidden>NEW SONGS UNLOCKED!</p>
+        <p id="dex-now-playing">♪ #001 ADUGARI</p>
+        <div id="dex-list" role="listbox" aria-label="Flanguage songs"></div>
+        <div id="dex-detail" hidden>
+          <p id="dex-detail-number">#001</p>
+          <h3 id="dex-detail-title">ADUGARI</h3>
+          <p id="dex-detail-album">FUNGALAGE · 2019</p>
+          <p id="dex-detail-duration">07:13</p>
+          <button id="dex-play" type="button">PLAY THIS SONG</button>
+          <button id="dex-detail-back" type="button">BACK TO LIST</button>
+        </div>
+        <footer id="dex-next">NEXT SONG #002 AT $75</footer>
       </section>
 
       <div id="bandcamp-fallback" hidden>
@@ -55,25 +131,20 @@
         ></iframe>
       </div>
 
-      <div id="touch-controls" aria-label="Touch controls">
-        <div id="joystick" aria-label="Movement joystick">
-          <div id="joystick-knob"></div>
+      <div id="touch-controls" aria-label="Game Boy touch controls">
+        <div id="joystick" role="group" aria-label="Analog movement joystick">
+          <div id="joystick-track" aria-hidden="true">
+            <i id="joystick-knob"></i>
+          </div>
         </div>
 
-        <div id="character-controls" role="group" aria-label="Choose band member">
-          <button type="button" data-character="0" aria-label="Play as Santi">S</button>
-          <button type="button" data-character="1" aria-label="Play as Nick">N</button>
-          <button type="button" data-character="2" aria-label="Play as Jake">J</button>
-        </div>
-
-        <div id="action-controls">
-          <button id="touch-use" class="small-action" type="button" aria-label="Use, enter, or exit">USE</button>
-          <button id="touch-skill" type="button" aria-label="Use instrument skill">FX</button>
-          <button id="touch-jam" class="primary-action" type="button" aria-label="Play instrument">JAM</button>
+        <div id="ab-controls" role="group" aria-label="Action buttons">
+          <button id="touch-b" type="button" aria-label="Directional music riff">RIFF</button>
+          <button id="touch-a" type="button" aria-label="Jam or use nearby object">JAM</button>
+          <button id="touch-jump" type="button" aria-label="Jump to the next road">JUMP</button>
         </div>
       </div>
 
-      <div id="rotate-note" aria-hidden="true">ROTATE ↻</div>
       <div id="announcement" role="status" aria-live="polite"></div>
     </main>
     <script type="module" src="./game.js"></script>

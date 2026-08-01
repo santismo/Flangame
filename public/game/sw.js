@@ -1,10 +1,11 @@
-const CACHE = "flangame-v2";
+const CACHE = "flangame-v11-instant-riff-controls";
 const ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./game.js",
-  "./bitcrusher-worklet.js",
+  "./baltimore-streets.json",
+  "./flangadex.json",
   "./icon.svg",
   "./manifest.webmanifest",
 ];

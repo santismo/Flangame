@@ -1,13 +1,13 @@
 {
   "name": "Flangame",
   "short_name": "Flangame",
-  "description": "Make money. Don't work. Don't feed the green.",
+  "description": "Play music for fleeing ghosts, collect their green bills, meet friendly slime, and unlock every Flanguage song.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "landscape",
-  "background_color": "#030504",
-  "theme_color": "#030504",
+  "orientation": "portrait-primary",
+  "background_color": "#050505",
+  "theme_color": "#050505",
   "icons": [
     {
       "src": "./icon.svg",
